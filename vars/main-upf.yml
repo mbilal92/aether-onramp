@@ -1,3 +1,6 @@
+aether:
+  ran_subnet: "172.20.0.0/16"	# empty string implies subnet comes from 'data_iface'
+
 k8s:
   rke2:
     version: v1.23.4+rke2r1
@@ -18,7 +21,6 @@ core:
   standalone: false
   data_iface: ens18
   values_file: "deps/5gc/roles/core/templates/sdcore-5g-values.yaml"
-  ran_subnet: "172.20.0.0/16"	# set to empty string to get subnet from 'data_iface'
   helm:
     local_charts: false
     chart_ref: aether/sd-core

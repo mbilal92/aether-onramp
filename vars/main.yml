@@ -1,3 +1,6 @@
+aether:
+  ran_subnet: "172.20.0.0/16"	# empty string implies subnet comes from 'data_iface'
+
 k8s:
   rke2:
     version: v1.23.4+rke2r1
@@ -18,17 +21,22 @@ core:
   standalone: true
   data_iface: ens18
   values_file: "deps/5gc/roles/core/templates/sdcore-5g-values.yaml"
-  ran_subnet: "172.20.0.0/16"	# set to empty string to get subnet from 'data_iface'
   helm:
     local_charts: false		# set chart_ref to local path name if true
     chart_ref: aether/sd-core
     chart_version: 1.0.12
   upf:
-    ip_prefix: "192.168.252.0/24"
+    ip_prefix: "192.168.252.0/24" # rename upf_subnet 
     iface: "access"
     mode: af_packet		# Options: af_packet or dpdk
+    upfs:
+      "0":
+        ip:
+          access: "192.168.252.6/24"
+          core:   "192.168.250.6/24"
+        ue_ip_pool: "172.248.0.0/16"    
   amf:
-    ip: "10.76.28.113"
+    ip: "172.16.233.219"
 
 gnbsim:
   docker:

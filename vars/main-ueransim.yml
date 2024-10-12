@@ -1,3 +1,6 @@
+aether:
+  ran_subnet: "172.20.0.0/16"	# empty string implies subnet comes from 'data_iface'
+
 k8s:
   rke2:
     version: v1.23.4+rke2r1
@@ -18,7 +21,6 @@ core:
   standalone: true
   data_iface: ens18
   values_file: "deps/5gc/roles/core/templates/sdcore-5g-values.yaml"
-  ran_subnet: "172.20.0.0/16"
   helm:
     local_charts: false
     chart_ref: aether/sd-core
@@ -28,13 +30,13 @@ core:
     iface: "access"
     mode: af_packet		# Options: af_packet or dpdk
   amf:
-    ip: "10.76.28.113"
+    ip: "172.16.233.219"
 
 ueransim:
   servers:
     0:
-      - "custom-gnb.yaml"
-      - "custom-ue.yaml"
+      - "deps/ueransim/config/custom-gnb.yaml"
+      - "deps/ueransim/config/custom-ue.yaml"
 
 amp:
   roc_models: "deps/amp/roles/roc-load/templates/roc-5g-models.json"
